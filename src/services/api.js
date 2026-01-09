@@ -13,13 +13,10 @@ async function handleResponse(response) {
 }
 
 function buildUrl(endpoint, params = {}) {
-    const url = new URL(`${BASE_URL}${endpoint}`);
-    const searchParams = new URLSearchParams(params);
-    // URL object handles the '?' automatically.
-    // If params are empty, search string is empty, and '?' is removed or omitted depending on implementation,
-    // but usually standard fetch handles URL objects correctly or we toString it.
-    url.search = searchParams.toString();
-    return url.toString();
+    // Manually construct URL to support relative paths
+    const queryString = new URLSearchParams(params).toString();
+    const url = `${BASE_URL}${endpoint}`;
+    return queryString ? `${url}?${queryString}` : url;
 }
 
 export const api = {
