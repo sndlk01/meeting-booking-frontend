@@ -35,7 +35,7 @@ export default function CreateRoomModal({ onClose, onSuccess }) {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: name === 'capacity' ? parseInt(value) || 0 : value
         }));
     };
 

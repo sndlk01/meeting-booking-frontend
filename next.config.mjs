@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
-    const apiUrl = process.env.API_BASE_URL || 'http://localhost:8081/api/v1';
+    const apiUrl = process.env.API_BASE_URL;
     // Remove trailing slash if present to avoid double slashes
     const cleanApiUrl = apiUrl.replace(/\/$/, '');
 

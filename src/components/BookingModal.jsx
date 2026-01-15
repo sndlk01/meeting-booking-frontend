@@ -52,7 +52,7 @@ export default function BookingModal({ room, onClose, onSuccess }) {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: name === 'participant_count' ? parseInt(value) || 0 : value
         }));
     };
 
