@@ -7,7 +7,17 @@ const headers = {
 async function handleResponse(response) {
     if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(errorText || `HTTP error! status: ${response.status}`);
+        let errorMessage;
+
+        try {
+            const errorJson = JSON.parse(errorText);
+            errorMessage = errorJson.message || errorJson.detail || errorJson.error;
+        } catch (e) {
+            // If parsing fails, use the raw text
+            errorMessage = errorText;
+        }
+
+        throw new Error(errorMessage || `HTTP error! status: ${response.status}`);
     }
     return response.json();
 }
